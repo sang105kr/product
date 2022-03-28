@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상품수정</title>
+  <style>
+    .product-wrap .product-body{
+      display:grid;
+      grid-template-column: 100px 300px;
+    }
+    .fieldError {
+      color:red;
+      font-size:0.8em;
+      font-width:bold;
+    }
+  </style>
+</head>
+
+<body>
+<div class="product-wrap">
+  <h3>상품수정</h3>
+  <div class="product-body">
+    <form id="updateForm" action="" th:action th:method="post" th:object="${updateForm}">
+      <input type="hidden" th:field="*{productId}">
+      <div><label for="">상품명</label></div>
+      <div>
+        <input type="text" th:field="*{pname}">
+        <div class="fieldError" th:errors="*{pname}"></div>
+      </div>
+      <div><label for="">수량</label></div>
+      <div>
+        <input type="text" th:field="*{quantity}">
+        <div class="fieldError" th:errors="*{quantity}"></div>
+      </div>
+      <div><label for="">가격</label></div>
+      <div>
+        <input type="text" th:field="*{price}">
+        <div class="fieldError" th:errors="*{price}"></div>
+      </div>
+    </form>
+  </div>
+  <div class="product-btngrp">
+    <button type="button" id="updateBtn">수정</button>
+    <button type="button" id="listBtn">목록</button>
+  </div>
+</div>
+<script>
+    //수정
+    const $updateBtn = document.getElementById('updateBtn');
+    $updateBtn.addEventListener('click', evt=>{
+      const frm = document.getElementById('updateForm')
+      const productId = frm.productId.value;
+      const url = `/product/${productId}/edit`;
+
+      frm.action = url;
+      frm.submit();
+    });
+
+    //목록
+     const $listBtn = document.getElementById('listBtn');
+     $listBtn.addEventListener('click', evt=>{
+      location.href = '/product/all';
+     });
+  </script>
+</body>
+</html>
