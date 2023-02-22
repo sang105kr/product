@@ -142,7 +142,7 @@ public class ProductController {
 
     productSVC.deleteByProductId(productId);
 
-    return "redirect:/products/all";  //항시 절대경로로
+    return "redirect:/products";  //항시 절대경로로
   }
 
   //목록
